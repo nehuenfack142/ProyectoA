@@ -1,0 +1,63 @@
+body {
+  font-family:  georgia, Times, serif;
+  margin: 0 ;
+}
+
+.contenido {
+  width:85%;
+  max-width: 850px;
+  margin: 0 auto;
+}
+
+.cabecera {
+  background: #81ecec;
+  padding: 1.5rem;
+  position: fixed;
+  top:0;
+  left:0;
+  right:0;
+}
+
+  .cabecera a {
+    color: black;
+    text-decoration: none;
+  }
+
+
+.logocontenido {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navegacion ul{
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+  .navegacion ul li{
+  display: inline-block;
+  }
+
+    .navegacion ul li a{
+      display: block;
+      padding: 0.5rem 1rem;
+      transition: all 0.3s linear;
+      border-radius: 10px;
+    }
+
+      .navegacion ul li a:hover{
+        background: #acacac23;
+      }
+
+.pdp{
+  background: #dfe6e9;
+  padding: 1rem;
+  text-align: center;
+  margin-top: 1.5rem;
+}
+
+.centro{
+  padding-top: 5rem;
+}
