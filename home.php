@@ -94,7 +94,7 @@ else{ ?>
 							while ($row = mysqli_fetch_array($run_msg)){
 								$sender_username = $row['sender_username'];
 								$recelver_username = $row['recelver_username'];
-								$msg_content = $row['msg_content'];
+								$mdg_content = $row['mdg_content'];
 								$msg_date = $row['msg_date'];
 							?>
 							<ul>
@@ -104,7 +104,7 @@ else{ ?>
 											<li>
 												<div class = 'rightside-chat'>
 													<span>$username <small>$msg_date</small></span>
-													<p>$msg_content</p>
+													<p>$mdg_content</p>
 												</div>
 											</li>
 										";
@@ -114,7 +114,7 @@ else{ ?>
 											<li>
 												<div class = 'rightside-chat'>
 													<span>$username <small>$msg_date</small></span>
-													<p>$msg_content</p>
+													<p>$mdg_content</p>
 												</div>
 											</li>
 										";
@@ -129,7 +129,7 @@ else{ ?>
 				<div class="row">
 					<div class="col-md-12 right-chat-textbox">
 						<form method="post">
-							<input autocomplete="off" type="text" name="msg_content" placeholder="Write your message......">
+							<input autocomplete="off" type="text" name="mdg_content" placeholder="Write your message......">
 							<button class="btn" name="submit"><i class="fa fa-telegrame" aria-hidden = "true"></i></button>
 						</form>
 					</div>
@@ -139,7 +139,7 @@ else{ ?>
 	</div>
 	<?php
 		if (isset($_POST['submit'])) {
-			$msg = htmlentities($_POST['msg_content']);
+			$msg = htmlentities($_POST['mdg_content']);
 			if($msg == ""){
 				echo"
 					<div class= 'alert alert-danger'>
@@ -155,7 +155,7 @@ else{ ?>
 				";
 			}
 			else{
-				$insert = "insert into users_chat(sender_username, recelver_username, msg_content, msg_status,msg_date) values ('$user_name','$username','$msg','unread', NOW())";
+				$insert = "insert into users_chat(sender_username, recelver_username, mdg_content, msg_status,msg_date) values ('$user_name','$username','$msg','unread', NOW())";
 				$run_insert = mysqli_query($con, $insert);
 			}
 		}
