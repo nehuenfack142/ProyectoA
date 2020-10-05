@@ -13,7 +13,7 @@ else{ ?>
 	<link rel="stylesheet" href="https://.maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-	<!-- <link rel="stylesheet" type="text/css" href="css/home.css"> -->
+	<link rel="stylesheet" type="text/css" href="css/home.css">
 </head>
 <body>
 	<div class="container main-section">
@@ -66,7 +66,7 @@ else{ ?>
 					?>
 					<div class="col-md-12 right-header">
 						<div class="right-header-img">
-							<img src="<?php echo "$user_profile_image"; ?>">
+							<img src=<?php echo "$user_profile_image"; ?>>
 						</div>
 						<div class="right-header-detail">
 							<form method="post">
@@ -102,19 +102,21 @@ else{ ?>
 									if($user_name == $sender_username AND $username == $recelver_username){
 										echo "
 											<li>
-												<div class = 'rightside-chat'>
+												<div class = 'rightside-right-chat'>
 													<span>$username <small>$msg_date</small></span>
 													<p>$mdg_content</p>
+													<br>
 												</div>
 											</li>
 										";
 									}
-									else if($user_name == $reciver_username AND $username == $sender_username){
+									else if($user_name == $recelver_username AND $username == $sender_username){
 										echo "
 											<li>
-												<div class = 'rightside-chat'>
+												<div class = 'rightside-left-chat'>
 													<span>$username <small>$msg_date</small></span>
 													<p>$mdg_content</p>
+													<br>
 												</div>
 											</li>
 										";
@@ -160,6 +162,18 @@ else{ ?>
 			}
 		}
 	?>
+
+	<script>
+		$('#scrilling_to_bottom').animate({
+		scrollTop: $('#scrilling_to_bottom').get(0).scrollHeight}, 1000);
+	</script>>
+	<script type="text/javascript">
+		$(document).ready(function(){
+			var height = $(window).height();
+			$('.left-chat').css('height', (height - 92) + 'px');
+			$('.right-header-contentChat').css('height',(height- 163) + 'px');
+		});
+	</script>
 </body>
 </html>
 <?php } ?>

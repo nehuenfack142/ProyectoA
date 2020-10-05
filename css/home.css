@@ -56,7 +56,7 @@
 	color: #B8BAC3;
 }
 .chat-left-detail span i{
-	color: #86BB71;
+	color: #00cec9;
 	font-size: 10px;
 }
 .chat-left-detail .orange{
@@ -112,13 +112,13 @@
 	margin-top: 20px;
 }
 .right-header-contentChat .rightside-left-chat p,.right-header-contentChat .rightside-right-chat p{
-	background-color: #86BB71;
+	background-color: #00cec9;
 	padding: 15px;
 	border-radius: 8px;
 	color: #fff;
 }
 .right-header-contentChat .rightside-right-chat p{
-	background-color: #94C2ED;
+	background-color: #b2bec3;
 }
 .right-chat-textbox{
 	padding: 15px 30px;
@@ -139,11 +139,11 @@
 	margin-left: 20px;
 }
 .rightside-left-chat span i,.rightside-right-chat span i{
-	color: #86BB71;
+	color: #00cec9;
 	font-size: 12px;
 }
 .rightside-right-chat span i{
-	color: #94C2ED;
+	color: #b2bec3;
 }
 .rightside-right-chat span{
 	float: right;
@@ -158,7 +158,7 @@
 	left: 15px;
 	bottom: 150px;
 	border: 15px solid transparent;
-	border-bottom-color: #86BB71;
+	border-bottom-color: #00cec9;
 	z-index: 1;
 }
 .rightside-right-chat:before{
@@ -168,7 +168,7 @@
 	right: 15px;
 	bottom: 150px;
 	border:15px solid transparent;
-	border-bottom-color: #94C2ED;
+	border-bottom-color: #b2bec3;
 }
 @media only screen and (max-width: 320px){
 	.main-section{
