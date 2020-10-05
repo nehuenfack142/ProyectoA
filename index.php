@@ -58,6 +58,19 @@
       <p>RECUERDA TUS CHATS DURAN 24 HORAS,no te pierdas la oportunidad de crear una nueva amistad y segui tus conversaciones en donde más te sea cómodo</p>
     </div>
 
+   <footer>
+     
+     <div class="social">
+       <img src="img/insta.png" width="20px" height="20px">
+       <img src="img/twiter.png" width="20px" height="20px">
+       <img src="img/face.jpg" width="20px" height="20px">
+
+     </div>
+
+     <div>
+       <p class="copy" >Chat Luck &copy; 2020</p>
+     </div>
+   </footer>
 
   </body>
 </html>
