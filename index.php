@@ -4,9 +4,10 @@
     <title>ProyectoA</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="style.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet"  href="estilos.css" type="text/css" >
   </head>
-  <body>
+
+  <body>   
     <header class="cabecera">
       <div class="contenido logocontenido">
         <a href="#" class="logo">CHAT LUCK</a>
@@ -20,15 +21,43 @@
       </div>
       </header>
 
-      <main class="centro">
-      <div class="contenido">
-        <span><a href="logout.php">Salir</a></span>
-      </div>
+      <main>
+        <section id="banner">
+          <img src="img/personas.jpg">
+          <div class="contenedor">
+            <div class= "caja">
+          <p>¿Que mejor que tener amigos en todo el mundo?</p> 
+          </div>
+        </section>
       </main>
-      <footer class="pdp">
-        <div class="contenido">
-          <p>Diseño de pag por ......</p>
-        </div>
-      </footer>
+
+      <div class="text">
+      <h1>BIENVENIDOS A LA PAGINA PRINCIPAL DE CHAT LUCK</h1>
+      <h3>Aqui podrás encontrar o informarte de lo que quieras sobre nuestra página</h3>
+      </div>
+
+    <br><br><br><br>
+      <div class="img">
+       <img src="img/celulares1.jpg" width="600px" height="350px">
+       </div>
+
+      <div class= "txt">
+      <p>
+      Chat luck es una plataforma que permite socializar y conocer personas de todas partes del mundo permitiendote aprender un poco de su cultura, idioma, país, religión y muchas cosas más, la idea de este chat es que uses tu honestidad 
+    </p>
+    </div>
+
+
+    
+    <div class="img1">
+      <img src="img/celulares2.jpg" width="650px" height="400px">
+    </div>
+
+
+    <div class="txt1">
+      <p>RECUERDA TUS CHATS DURAN 24 HORAS,no te pierdas la oportunidad de crear una nueva amistad y segui tus conversaciones en donde más te sea cómodo</p>
+    </div>
+
+
   </body>
 </html>
