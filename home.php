@@ -10,10 +10,10 @@ else{ ?>
 <html>
 <head>
 	<title>My Chat - HOME</title>
-	<link rel="stylesheet" href="https://.maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="css/home.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
 <body>
 	<div class="container main-section">
@@ -44,10 +44,8 @@ else{ ?>
 					?>
 
 					<!-- getting the user data on which user click -->
-					<?php  
+					<?php 
 						if(isset($_GET['user_name'])){
-
-							global $con;
 
 							$get_username = $_GET['user_name'];
 							$get_user = "select * from users where user_name ='$get_username'";
@@ -55,7 +53,7 @@ else{ ?>
 							$run_user = mysqli_query($con, $get_user);
 
 							$row_user = mysqli_fetch_array($run_user);
-
+						
 							$username = $row_user['user_name'];
 							$user_profile_image = $row_user['user_profile'];
 						}
@@ -120,7 +118,7 @@ else{ ?>
 												</div>
 											</li>
 										";
-										}
+									}
 								?>
 							</ul>
 							<?php  

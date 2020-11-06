@@ -15,10 +15,10 @@ include("include/connection.php");
 		if($check_user == 1){
 			$_SESSION['user_email']=$email;
 
-			$update_msg - mysqli_query($con, "UPDATE user SET log_in='Online'WHERE user_email='$email'");
+			$update_msg = mysqli_query($con, "UPDATE users SET log_in='Online' WHERE user_email='$email'");
 
 			$user = $_SESSION['user_email'];
-			$get_user = "select * from user where user_email='$user'";
+			$get_user = "select * from users where user_email='$user'";
 			$run_user = mysqli_query($con, $get_user);
 			$row = mysqli_fetch_array($run_user);
 
