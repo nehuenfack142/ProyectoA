@@ -2,7 +2,7 @@ body{
 	color:#999;
 	background-image:url(../images/imagen.jpg);
 	font-family: 'Roboto', sans-serif;
-	background-size: 1300px 630px;
+	background-size: cover;
 }
 
 .form-control{
