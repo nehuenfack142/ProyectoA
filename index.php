@@ -23,7 +23,7 @@
 
       <main>
         <section id="banner">
-          <img src="img/personas.jpg">
+          <img src="img/personas4.jpg">
           <div class="contenedor">
             <div class= "caja">
           <p>¿Que mejor que tener amigos en todo el mundo?</p> 
