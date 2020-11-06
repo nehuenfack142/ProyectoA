@@ -112,12 +112,13 @@ font-size: 28px;
 #banner p{
   font-size: 40px;
   text-align: center;
+  color:#000000;
 }
 
 .caja { 
 font-size: 18px;  
 color: #ffffff; 
-background:#ee0467
+background:#ee0467;
  }
 
 .text{

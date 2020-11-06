@@ -10,7 +10,8 @@
   <body>   
     <header class="cabecera">
       <div class="contenido logocontenido">
-        <a href="#" class="logo">CHAT LUCK</a>
+        <img src="img/unknown.jpg">
+        <a href="#" class="logo"></a>
         <nav class="navegacion">
           <ul>
             <li><a href="login.php">Login</a></li>
