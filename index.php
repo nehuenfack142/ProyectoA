@@ -10,7 +10,7 @@
   <body>   
     <header class="cabecera">
       <div class="contenido logocontenido">
-        <img src="img/unknown.jpg">
+        <img src="img/logo.jpg">
         <a href="#" class="logo"></a>
         <nav class="navegacion">
           <ul>
