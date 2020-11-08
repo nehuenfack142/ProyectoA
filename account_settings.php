@@ -87,8 +87,7 @@ else { ?>
 					<td style="font-weight: bold;">Forgotten Password</td>
 					<td>
 						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Forgotten Password</button>
-
-						<div class="modal fade" id="myModal" role="dialog">
+						<div id="myModal" class="modal fade" role="dialog">
 							<div class="modal-dialog">
 								<div class="modal-content">
 									<div class="modal-header">
@@ -119,6 +118,9 @@ else { ?>
 												$run = mysqli_query($con, $update);
 
 												if($run){
+													echo "<script>alert('Working...')</script>";
+													echo "<script>window.open('account_settings.php','_self')</script>";
+												}else{
 													echo "<script>alert('Error while Updating Information.')</script>";
 													echo "<script>window.open('account_settings.php','_self')</script>";
 												}
@@ -150,7 +152,7 @@ else { ?>
 				$u_country = htmlentities($_POST['u_country']);
 				$u_gender = htmlentities($_POST['u_gender']);
 
-				$update = "update users set user_name = '$user_name',user_email = '$email',user_country = '$u_country',user_gender = '$u_gender', where user_email = '$user'";
+				$update = "update users set user_name = '$user_name', user_email = '$email', user_country = '$u_country', user_gender = '$u_gender' where user_email = '$user'";
 
 				$run = mysqli_query($con,$update);
 
