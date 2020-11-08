@@ -6,6 +6,7 @@ include("include/connection.php");
 		$email=htmlentities(mysqli_real_escape_string($con, $_POST['user_email']));
 		$conutry=htmlentities(mysqli_real_escape_string($con, $_POST['user_country']));
 		$gender=htmlentities(mysqli_real_escape_string($con, $_POST['user_gender']));
+		$bf=htmlentities(mysqli_real_escape_string($con, $_POST['forgotten_answer']));
 		$rand=rand(1,2);
 
 		if($name==''){
@@ -32,7 +33,7 @@ include("include/connection.php");
 		else if ($rand == 2)
 			$profile_pic = "images/imagen3.jpg";
 
-		$insert = "insert into users(user_name, user_pass, user_email, user_profile, user_country, user_gender) values('$name', '$pass','$email','$profile_pic', '$conutry', '$gender')";
+		$insert = "insert into users(user_name, user_pass, user_email, user_profile, user_country, user_gender, forgotten_answer) values('$name', '$pass','$email','$profile_pic', '$conutry', '$gender', '$bf')";
 
 		$query = mysqli_query($con, $insert);
 

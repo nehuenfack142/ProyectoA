@@ -54,6 +54,14 @@
 					<option>Others</option>
 				</select>
 			</div>
+
+
+			<div class="form-group">
+				<label>Best Friend</label>
+				<input type="text" class="form-control" name="forgotten_answer" placeholder="ELPEPE" autocomplete="off" required>
+			</div>
+
+
 			<div class="form-group">
 				<label class="checkbox-inline"><input type="checkbox" required>I accept the <a href="#">Terms of Use</a> &amp; <a href="#">Privacy Policy</a></label>
 			</div>
