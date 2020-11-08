@@ -17,6 +17,8 @@ else { ?>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://naxcdn.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"></script> 
+    <script src="~/Scripts/jquery-2.2.1.min.js"></script>    
+	<script src="~/Scripts/bootstrap.min.js"></script>
 </head>
 <body>
 	<div class="row">
@@ -136,7 +138,7 @@ else { ?>
 						</div>
 				</tr>
 
-				<tr><td></td><td><a class="btn btn-default" style="text-decoration:none; font-size: 15px;" href="change_password.php"><i class="fa fa-key fa-fw" aria-hidden="true"></i>Change Password</a></td></tr>
+				<tr><td></td><td><a class="btn btn-default" style="text-decoration:none; font-size: 15px;" href="change_password.php"><i class="fa fa-key fa-fw" aria-hidden="true"></i>Change Password</td></tr>
 
 				<tr align="center">
 					<td colspan="6">
