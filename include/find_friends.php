@@ -38,14 +38,14 @@ else { ?>
     <div class="row">
       <div class="col-sm-4">
       </div>
-      <div class="col-sm4">
+      <div class="col-sm-4">
         <form class="search_form" action="">
           <input type="text" name="search_query" placeholder="Search Friends" autocomplete="off"required>
           <button class="btn" type="submit" name="search_btn">Search</button>
           
         </form>
       </div>
-      <div class="col-sm--4"></div>
+      <div class="col-sm-4"></div>
     </div><br><br>
     <?php search_user(); ?>
 
