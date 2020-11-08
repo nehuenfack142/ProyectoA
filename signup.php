@@ -42,7 +42,7 @@
 					<option>Peru</option>
 					<option>Equador</option>
 					<option>Colombia</option>
-					<option>Vecezuela</option>
+					<option>Venezuela</option>
 				</select>
 			</div>
 			<div class="form-group">
