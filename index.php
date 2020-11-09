@@ -4,10 +4,12 @@
     <title>ProyectoA</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet"  href="estilos.css" type="text/css" >
+    <link rel="stylesheet"  href="estilos2.css" type="text/css">
   </head>
 
-  <body>   
+  <body> 
+
+    <main>
     <header class="cabecera">
       <div class="contenido logocontenido">
         <img src="img/logo.jpg">
@@ -61,17 +63,12 @@
 
    <footer>
      
-     <div class="social">
-       <img src="img/insta.png" width="20px" height="20px">
-       <img src="img/twiter.png" width="20px" height="20px">
-       <img src="img/face.jpg" width="20px" height="20px">
-
-     </div>
-
      <div>
        <p class="copy" >Chat Luck &copy; 2020</p>
      </div>
    </footer>
+  
+  </main>
 
-  </body>
+</body>
 </html>
