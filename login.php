@@ -17,9 +17,10 @@
       <header>     Terminos y condiciones</header>
       <label for="btn-modal">X</label>
       <div class="contenido">
-        <br>
-        <input type="checkbox" name="term-cond" > Acepto los <a href="JOSUUU ACA VA EL LINK">terminos y condiciones</a> expuestos aqui<br><br>
-        <input type="checkbox" name="pol-priv">Acepto la<a href="JOSUUU ACA VA EL LINK">politica de privacidad</a> que proporciona este sitio web<br>
+        <br> 
+        <input type="checkbox" name="term-cond" > Acepto los <a href="termsycon.php" target="_blank">terminos y condiciones</a> expuestos aqui<br><br>
+        <input type="checkbox" name="pol-priv">Acepto la<a href="termsycon.php" target="_blank">politica de privacidad</a> que proporciona este sitio web<br>
+        </div>
         <p>Para continuar presione los casilleros de arriba</p>
       </div>
       </div>

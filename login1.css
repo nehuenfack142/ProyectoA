@@ -126,5 +126,13 @@ transform: translateY(-30%);
   margin:auto;
   margin-left:10px;
   margin-right: 10px;
+}
+
+.contenido button{
+  cursor: pointer;
+  border:0px;
+  font-size:15px;
+  background: white;
 
 }
+
