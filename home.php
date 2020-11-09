@@ -11,7 +11,7 @@ else{ ?>
 <head>
 	<title>My Chat - HOME</title>
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="stylesheet" type="text/css" href="css/home.css">
+	<link rel="stylesheet" type="text/css" href="css/home2.css">
 	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 </head>
@@ -72,6 +72,40 @@ else{ ?>
 								<span><?php echo "$total"; ?> messages</span>&nbsp &nbsp
 								<button name="logout" class="btn btn-danger">Logout</button>
 							</form>
+							<table class="cantainer">
+								<tr class="info">
+									<td id="hrs"></td>
+								</tr>
+
+								<td>Hours</td>
+									
+
+							</table>
+							<script type="text/javascript">
+								
+								function countDown()
+								{ var today = new Date();
+									var eventDate = new Date ("January 1,2018 00:00:00");
+
+									var currentTime = today.getTime();
+									var eventTime = eventDate.getTime();
+
+									var remTime=eventTime - currentTime;
+
+									var hrs = Math.floor(((remTime/1000)/60)/60);
+
+									hrs = hrs % 24;
+
+									hrs=(hrs<10) ?  "0"+hrs : hrs;
+
+									document.getElementById("hrs").innerHTML = hrs  ;
+
+									setTimeout(countDown,1000);
+
+								}
+								countDown();
+
+							</script>
 							<?php
 								if(isset($_POST['logout'])){
 									$update_msg = mysqli_query($con, "UPDATE users SET log_in = 'Offline' WHERE user_name = '$user_name'");
@@ -83,7 +117,14 @@ else{ ?>
 					</div>
 				</div>
 				<div class="row">
-					<div id="scrilling_to_bottom" class="col-md-12 right-header-contentChat">
+					<script> 
+					$(document).ready(function(){
+					setInterval(function(){
+					      $("#scrilling_to_bottom").load(window.location.href + " #scrilling_to_bottom" );
+					}, 10);
+					});
+					</script>
+					<div id="scrilling_to_bottom" Refresh:0 class="col-md-12 right-header-contentChat">
 						<?php
 							$update_msg = mysqli_query($con, "UPDATE users_chat SET msg_status = 'read' WHERE sender_username='$username' AND recelver_username= '$user_name'");
 							$sel_msg = "select * from users_chat where (sender_username='$user_name' AND recelver_username='$username') OR (recelver_username='$user_name' AND sender_username='$username') ORDER by 1 ASC";
@@ -101,9 +142,9 @@ else{ ?>
 										echo "
 											<li>
 												<div class = 'rightside-right-chat'>
-													<span>$username <small>$msg_date</small></span>
+													<span>$user_name <small>$msg_date</small></span>
+													<br><br>
 													<p>$mdg_content</p>
-													<br>
 												</div>
 											</li>
 										";
@@ -113,8 +154,8 @@ else{ ?>
 											<li>
 												<div class = 'rightside-left-chat'>
 													<span>$username <small>$msg_date</small></span>
+													<br><br>
 													<p>$mdg_content</p>
-													<br>
 												</div>
 											</li>
 										";
@@ -130,7 +171,7 @@ else{ ?>
 					<div class="col-md-12 right-chat-textbox">
 						<form method="post">
 							<input autocomplete="off" type="text" name="mdg_content" placeholder="Write your message......">
-							<button class="btn" name="submit"><i class="fa fa-telegrame" aria-hidden = "true"></i></button>
+							<button class="boton botonloquillo1" name="submit"></button>
 						</form>
 					</div>
 				</div>
