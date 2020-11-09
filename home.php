@@ -72,40 +72,7 @@ else{ ?>
 								<span><?php echo "$total"; ?> messages</span>&nbsp &nbsp
 								<button name="logout" class="btn btn-danger">Logout</button>
 							</form>
-							<table class="cantainer">
-								<tr class="info">
-									<td id="hrs"></td>
-								</tr>
-
-								<td>Hours</td>
-									
-
-							</table>
-							<script type="text/javascript">
-								
-								function countDown()
-								{ var today = new Date();
-									var eventDate = new Date ("January 1,2018 00:00:00");
-
-									var currentTime = today.getTime();
-									var eventTime = eventDate.getTime();
-
-									var remTime=eventTime - currentTime;
-
-									var hrs = Math.floor(((remTime/1000)/60)/60);
-
-									hrs = hrs % 24;
-
-									hrs=(hrs<10) ?  "0"+hrs : hrs;
-
-									document.getElementById("hrs").innerHTML = hrs  ;
-
-									setTimeout(countDown,1000);
-
-								}
-								countDown();
-
-							</script>
+							
 							<?php
 								if(isset($_POST['logout'])){
 									$update_msg = mysqli_query($con, "UPDATE users SET log_in = 'Offline' WHERE user_name = '$user_name'");
@@ -170,6 +137,7 @@ else{ ?>
 				<div class="row">
 					<div class="col-md-12 right-chat-textbox">
 						<form method="post">
+
 							<input autocomplete="off" type="text" name="mdg_content" placeholder="Write your message......">
 							<button class="boton botonloquillo1" name="submit"></button>
 						</form>

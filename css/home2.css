@@ -184,7 +184,7 @@
 {
 	position: absolute;
 	top: 50%;
-	left:50%;
+	left:90%;
 	transform: translate(-50%,-50%);
 	text-align: center;
 	padding:12px;
@@ -197,5 +197,5 @@
 .info
 {
 	font-family: sevenSegment;
-	font-size: 140px;
+	font-size: 40px;
 }
