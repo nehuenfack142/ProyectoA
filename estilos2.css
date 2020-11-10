@@ -52,25 +52,29 @@ z-index: 100;
 }
 
 .navegacion ul{
+  font-family: 'Oxygen', sans-serif;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
   .navegacion ul li{
+
   display: inline-block;
+  background: #1877f2;
+  padding: 0.5rem 1rem;
+  transition: all 0.3s linear;
+  border-radius: 10px;
   }
 
     .navegacion ul li a{
-      display: block;
-      padding: 0.5rem 1rem;
-      transition: all 0.3s linear;
-      border-radius: 10px;
+      display: block;  
     }
 
       .navegacion ul li a:hover{
         background: #acacac23;
       }
+
 
 .pdp{
   background: #dfe6e9;

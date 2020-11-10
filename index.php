@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet"  href="estilos2.css" type="text/css">
+   <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Inline+Text:wght@500&family=Oxygen&display=swap" rel="stylesheet">
   </head>
 
   <body> 
@@ -15,7 +16,6 @@
         <img src="img/logo.jpg">
         <a href="#" class="logo"></a>
         <nav class="navegacion">
-          <ul>
             <li><a href="login.php">Login</a></li>
             <li><a href="register.php">Register</a></li>
             <li><a href="chat.php">Chat</a></li>
