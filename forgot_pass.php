@@ -3,7 +3,7 @@
 <head>
 	<title>Login to your account</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="css/signin.css">
+	<link rel="stylesheet" type="text/css" href="css/signin2.css">
 	<meta htpp-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/css?family=Roboto|Courgette|Pacifico:400,700" rel="stylesheet" >
@@ -15,23 +15,23 @@
 	<div class="signin-form">
 		<form action="" method="post">
 			<div>
-				<h2>Forgot password</h2>
-				<p>MYChat</p>
+				<h2>Forgot Password</h2>
+				<p>ChatLook</p>
 			</div>
 			<div class="form-group">
 				<label>Email</label>
 				<input type="email" class="form-control" name="email" placeholder="unemial@sitio.com" autocomplete="off" required>
 			</div>
 			<div class="form-group">
-				<label>BestFrieds Name</label>
-				<input type="password" class="form-control" name="bf" placeholder="Someone..." autocomplete="off" required>
+				<label>Nombre de tu mejor amigo</label>
+				<input type="password" class="form-control" name="bf" placeholder="Alguien..." autocomplete="off" required>
 			</div>
 	
 			<div class="form-group">
 				<button type="submit" class="btn btn primary btn-primary btn-block btn-lg" name="submit">Submit</button>
 			</div>
 
-		<div class="text-center small" style="color: #67428B;">Back to sing in ? <a href="signin.php">Click here</a></div>
+		<div class="text-center small" style="color: #67428B;">Quieres volver a loggearte ? <a href="signin.php">Click Aqui</a></div>
 	</div>
 	<?php
     session_start();

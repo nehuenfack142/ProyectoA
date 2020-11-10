@@ -7,23 +7,20 @@ include("include/connection.php");
 		$conutry=htmlentities(mysqli_real_escape_string($con, $_POST['user_country']));
 		$gender=htmlentities(mysqli_real_escape_string($con, $_POST['user_gender']));
 		$bf=htmlentities(mysqli_real_escape_string($con, $_POST['forgotten_answer']));
+		$user_hora=htmlentities(mysqli_real_escape_string($con, $_POST['user_hora']));
 		$rand=rand(1,2);
 
 		if($name==''){
-			echo"<script>alert('We can not verify your name')</script>";
+			echo"<script>alert('No podemos verificar su nombre')</script>";
 		}
-		if(strlen($pass)<8){
-			echo"<script>alert('Password should be minimum 8 caracters!')</script>";
-			exit();
-		}
-
+		
 		$check_email="select * from users where user_email ='$email'";
 		$run_email=mysqli_query($con,$check,$email);
 
 		$check= mysqli_num_rows($run_email);
 
 		if($check==1){
-			echo"<script>alert('Emial already exist, plese try again!'</script>";
+			echo"<script>alert('Este mail ya existe, por favor ingresar otro!'</script>";
 			echo"<script>window.open('signup.php','_self')</script>";
 			exit();
 		}
@@ -33,7 +30,7 @@ include("include/connection.php");
 		else if ($rand == 2)
 			$profile_pic = "images/imagen3.jpg";
 
-		$insert = "insert into users(user_name, user_pass, user_email, user_profile, user_country, user_gender, forgotten_answer) values('$name', '$pass','$email','$profile_pic', '$conutry', '$gender', '$bf')";
+		$insert = "insert into users(user_name, user_pass, user_email, user_profile, user_country, user_gender, forgotten_answer, user_hora) values('$name', '$pass','$email','$profile_pic', '$conutry', '$gender', '$bf', '$user_hora')";
 
 		$query = mysqli_query($con, $insert);
 

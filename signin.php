@@ -16,22 +16,23 @@
 		<form action="" method="post">
 			<div>
 				<h2>Sign In</h2>
-				<p>Login to Chatlook</p>
+				<p>Login to ChatLook</p>
 			</div>
 			<div class="form-group">
 				<label>Email</label>
 				<input type="email" class="form-control" name="email" placeholder="unemial@sitio.com" autocomplete="off" required>
 			</div>
 			<div class="form-group">
-				<label>Password</label>
-				<input type="password" class="form-control" name="pass" placeholder="Password" autocomplete="off" required>
+				<label>Contraseña</label>
+				<input type="password" class="form-control" name="pass" placeholder="quenosea123" autocomplete="off" required>
 			</div>
-			<div class="small">Forgot password? <a href="forgot_pass.php">Click Here</a></div><br>
+			
+			<div class="small">Se te olvidó tu contraseña? <a href="forgot_pass.php">Click Aqui</a></div><br>
 			<div class="form-group">
 				<button type="submit" class="btn btn primary btn-primary btn-block btn-lg" name="sign_in">Sign In</button>
 			</div>
 			<?php include("signin_user.php"); ?> 
-		<div class="text-center small" style="color: #67428B;">Don't have an account? <a href="signup.php">Create one</a></div>
+		<div class="text-center small" style="color: #67428B;">No tienes una cuenta? <a href="signup.php">Crea Una</a></div>
 	</div>
 </body>
 </html>

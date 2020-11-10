@@ -22,7 +22,8 @@ else { ?>
 </head>
 <body>
 	<div class="row">
-	</div>
+		<div class="col-sm-2"></div>
+	
 	<?php  
 		$user = $_SESSION['user_email'];
 		$get_user ="select * from users where user_email = '$user'";
@@ -43,22 +44,15 @@ else { ?>
 					<td colspan="6" class="active"><h2>Change Account Settings</h2></td>
 				</tr>
 				<tr>
-					<td style="font-weight: bold;">Change Your Username</td>
+					<td style="font-weight: bold;">Cambia Nombre de Usuario</td>
 					<td>
 						<input type="text" name="u_name" class="form-control" required value="<?php echo $user_name;?>" />
 					</td>
 				</tr>
 
-				<tr><td></td><td><a class="btn btn-default" style="text-decoration: none; font-size: 15px;" href="upload.php"><i class="fa fa-user" aria-hidden="true"></i> Change Profile</a></td></tr>
-
+				<tr><td></td><td><a class="btn btn-default" style="text-decoration: none; font-size: 15px;" href="upload.php"><i class="fa fa-user" aria-hidden="true"></i> Foto de perfil</a></td></tr>
 				<tr>
-					<td style="font-weight: bold;">Change Your Email</td>
-					<td>
-						<input type="email" name="u_email" class="form-control" required value="<?php echo $user_email;?>" />
-					</td>
-				</tr>
-				<tr>
-					<td style="font-weight: bold;">Change Your Country</td>
+					<td style="font-weight: bold;">Cambia tu Pais</td>
 					<td>
 						<select class="form-control" name="u_country">
 							<option><?php echo $user_country;?></option>
@@ -71,74 +65,25 @@ else { ?>
 							<option>Equador</option>
 							<option>Colombia</option>
 							<option>Venezuela</option>
+							<option>Bolivia</option>
 						</select>
 					</td>
 				</tr>
 				<tr>
-					<td style="font-weight: bold;">Change Your Gender</td>
+					<td style="font-weight: bold;">Cambia tu Genero</td>
 					<td>
 						<select class="form-control" name="u_gender">
 							<option><?php echo $user_gender;?></option>
-							<option>Female</option>
-							<option>Male</option>
-							<option>Others</option>
+							<option>Mujer</option>
+							<option>Hombre</option>
+							<option>Otros</option>
 						</select>
 					</td>
 				</tr>
-				<tr>
-					<td style="font-weight: bold;">Forgotten Password</td>
-					<td>
-						<button type="button" class="btn btn-default" data-toggle="modal" data-target="#myModal">Forgotten Password</button>
-						<div id="myModal" class="modal fade" role="dialog">
-							<div class="modal-dialog">
-								<div class="modal-content">
-									<div class="modal-header">
-										<button type="button" class="close" data-dismiss="modal">&times;</button>
-									</div>
-									<div class="modal-body">
-										<form action="recovery.php?id=<?php echo $user_id;?>" method="post" id="f">
-											<strong>What is your School Best Friend Name?</strong>
-											<textarea class="form-control" cols="83" rows="4" name="content" placeholder="Someone"></textarea><br>
-											<input class="btn btn-default" type="submit" name="sub" value="Submit" style="width: 100px;"><br><br>
-											<pre>Answer the above question we will ask you this question if you forgot your <br> Password.</pre>
-											<br><br>
-										</form>
-										<?php  
 
-										if(isset($_POST['sub'])){
-											$bfn= htmlentities($_POST['content']);
-
-											if($bfn == ''){
-
-												echo "<script>alert('Please Enter Something.')</script>";
-												echo "<script>window.open('account_settings.php','_self')</script>";
-												exit();
-											}
-											else{
-												$update = "update users set forgotten_answer='$bfn' where user_email = '$user'";
-
-												$run = mysqli_query($con, $update);
-
-												if($run){
-													echo "<script>alert('Working...')</script>";
-													echo "<script>window.open('account_settings.php','_self')</script>";
-												}else{
-													echo "<script>alert('Error while Updating Information.')</script>";
-													echo "<script>window.open('account_settings.php','_self')</script>";
-												}
-											}
-										}
-										?>
-									</div>
-									<div class="modal-footer">
-										<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-									</div>
-								</div>
-							</div>
-						</div>
-				</tr>
-
-				<tr><td></td><td><a class="btn btn-default" style="text-decoration:none; font-size: 15px;" href="change_password.php"><i class="fa fa-key fa-fw" aria-hidden="true"></i>Change Password</td></tr>
+				
+				
+				<tr><td></td><td><a class="btn btn-default" style="text-decoration:none; font-size: 15px;" href="change_password.php"><i class="fa fa-key fa-fw" aria-hidden="true"></i>Cambiar Contraseña</td></tr>
 
 				<tr align="center">
 					<td colspan="6">
@@ -150,11 +95,10 @@ else { ?>
 		<?php  
 			if(isset($_POST['update'])){
 				$user_name = htmlentities($_POST['u_name']);
-				$email = htmlentities($_POST['u_email']);
 				$u_country = htmlentities($_POST['u_country']);
 				$u_gender = htmlentities($_POST['u_gender']);
 
-				$update = "update users set user_name = '$user_name', user_email = '$email', user_country = '$u_country', user_gender = '$u_gender' where user_email = '$user'";
+				$update = "update users set user_name = '$user_name', user_country = '$u_country', user_gender = '$u_gender' where user_email = '$user'";
 
 				$run = mysqli_query($con,$update);
 

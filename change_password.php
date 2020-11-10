@@ -10,7 +10,7 @@ if (!isset($_SESSION['user_email'])){
 else { ?>
 <html>
 <head>
-    <title>Change Profile Piacture</title>
+    <title>Change Password</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
@@ -34,21 +34,21 @@ body{
 						<td colspan="6" class="active"><h2>Change Password</h2></td>
 					</tr>
 					<tr>
-						<td style="font-weight: bold;">Current Password</td>
+						<td style="font-weight: bold;">Contraseña Actual</td>
 						<td>
-							<input type="password" name="current_pass" id="mypass" class="form-control" required placeholder="Current Password" />
+							<input type="password" name="current_pass" id="mypass" class="form-control" required placeholder="quenosea123" />
 						</td>
 					</tr>
 					<tr>
-						<td style="font-weight: bold;">New Password</td>
+						<td style="font-weight: bold;">Nueva Contraseña</td>
 						<td>
-							<input type="password" name="u_pass1" id="mypass" class="form-control" required placeholder="New Password" />
+							<input type="password" name="u_pass1" id="mypass" class="form-control" required placeholder="quenosea1234" />
 						</td>
 					</tr>
 					<tr>
-						<td style="font-weight: bold;">Confirm Password</td>
+						<td style="font-weight: bold;">Confirmar Contraseña</td>
 						<td>
-							<input type="password" name="u_pass2" id="mypass" class="form-control" required placeholder="Confirm Password" />
+							<input type="password" name="u_pass2" id="mypass" class="form-control" required placeholder="Confirmar quenosea1234" />
 						</td>
 					</tr>
 					<tr align="center">
@@ -75,7 +75,7 @@ body{
 					if($c_pass !== $user_password){
 						echo"
 							<div class='alert alert-danger'>
-								<strong>Your Old password didn't match</strong>
+								<strong>Tu Contraseña Actual no coincide</strong>
 							</div>
 						";
 					}
@@ -83,7 +83,7 @@ body{
 					if($pass1 != $pass2){
 						echo"
 							<div class='alert alert-danger'>
-								<strong>Your New password didn't match with confirm password</strong>
+								<strong>Las Contraseñas no coinciden</strong>
 							</div>
 						";
 					}
@@ -92,7 +92,7 @@ body{
 						$update_pass = mysqli_query($con, "UPDATE users SET user_pass = '$pass1' WHERE user_email='$user'");
 						echo"
 							<div class='alert alert-danger'>
-								<strong>Your Password is Changed</strong>
+								<strong>Tu Contraseña se a Cambiado</strong>
 							</div>
 						";
 					}

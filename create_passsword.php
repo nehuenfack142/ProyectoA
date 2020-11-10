@@ -3,7 +3,7 @@
 <head>
 	<title>Login to your account</title>
 	<meta charset="utf-8">
-	<link rel="stylesheet" type="text/css" href="css/signin.css">
+	<link rel="stylesheet" type="text/css" href="css/signin2.css">
 	<meta htpp-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link href="https://fonts.googleapis.com/css?family=Roboto|Courgette|Pacifico:400,700" rel="stylesheet" >
@@ -15,20 +15,20 @@
 	<div class="signin-form">
 		<form action="" method="post">
 			<div>
-				<h2>Create New Password</h2>
-				<p>MyCaht</p>
+				<h2>New Password</h2>
+				<p>ChatLook</p>
 			</div>
 			<div class="form-group">
-				<label>Enter Password</label>
-				<input type="password" class="form-control" name="pass1" placeholder="Password" autocomplete="off" required>
+				<label>Ingrese Contraseña</label>
+				<input type="password" class="form-control" name="pass1" placeholder="quenosea123" autocomplete="off" required>
 			</div>
 			<div class="form-group">
-				<label>Confirm Password</label>
-				<input type="password" class="form-control" name="pass2" placeholder="Confirm Password" autocomplete="off" required>
+				<label>Confirme Contraseña</label>
+				<input type="password" class="form-control" name="pass2" placeholder="quenosea123" autocomplete="off" required>
 			</div>
 		
 			<div class="form-group">
-				<button type="submit" class="btn btn primary btn-primary btn-block btn-lg" name="change">change</button>
+				<button type="submit" class="btn btn primary btn-primary btn-block btn-lg" name="change">Cambiar</button>
 			</div>
 		</form>
 	</div>

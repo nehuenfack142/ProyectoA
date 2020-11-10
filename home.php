@@ -139,7 +139,7 @@ else{ ?>
 						<form method="post">
 
 							<input autocomplete="off" type="text" name="mdg_content" placeholder="Write your message......">
-							<button class="boton botonloquillo1" name="submit"></button>
+							<button class="btn btn-danger" name="submit">Submit</button>
 						</form>
 					</div>
 				</div>
