@@ -18,18 +18,7 @@ include("include/connection.php");
 
         $query = mysqli_query($con, $select_user);
         $check_user = mysqli_num_rows($query);
-
-        #$user_hora2=time($user_hora);
-        if ($user_hora<($user_hora+24))
-                $check_user=3;
-
-                echo " <div class='alert alert-danger'>
-                <span>$user_hora</span>
-            </div>";
-
-
-
-
+        
         if($check_user == 1){
             $_SESSION['user_email']=$email;
 
