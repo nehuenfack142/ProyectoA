@@ -6,13 +6,7 @@ include("include/connection.php");
     if(isset($_POST['sign_in'])){
         $email=htmlentities(mysqli_real_escape_string($con, $_POST['email']));
         $pass=htmlentities(mysqli_real_escape_string($con, $_POST['pass']));
-        $sql="SELECT * from user";
-        $result=mysqli_query($con,$q);
-        $user_hora=$result['user_hora'];
 
-        echo " <div class='alert alert-danger'>
-                <span>$user_hora</span>
-            </div>";
 
         $select_user = "select * from users where user_email='$email' AND user_pass='$pass'";
 
@@ -32,13 +26,7 @@ include("include/connection.php");
             $user_name = $row['user_name'];
 
             echo "<script>window.open('home.php?user_name=$user_name', '_self')</script>";
-        }else if ($check_user == 3){
-
-            echo"
-            <div class='alert alert-danger'>
-                <strong>Te has quedado sin horas para chatear.</strong>
-            </div>";
-
+            
 
         }
         else{
