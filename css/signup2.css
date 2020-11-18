@@ -1,0 +1,225 @@
+
+.modal1{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal1{
+  z-index: 51;
+  position: fixed;
+  top:0;
+  left: 0;
+  background: rgba(0,0,0,0.5);
+  transition: all 500ms ease;
+  opacity: 0;
+  visibility: hidden;
+}
+#btn-modal1:checked ~ .modal1{
+  opacity: 1;
+  visibility: visible;
+}
+.conteiner1{
+transform: translateY 110px;
+width: 500px;
+height: 200px;
+margin:auto;
+background:black;
+box-shadow: 1px 7px 25px rgba(0,0,0,0.6);
+transition: all 500ms ease;
+position: relative;
+transform: translateY(-30%);
+overflow: hidden;
+  overflow-y: scroll;
+}
+
+#btn-modal1:checked ~ .modal1 .conteiner1{
+ transform: translateY(0%);
+}
+
+.conteiner1 header{
+  padding: 10px;
+  background: #81ecec;
+  color: white;
+  text-align: center;
+  color:black;
+}
+.conteiner1 label{
+  position: absolute;
+  top:10px;
+  right: 10px;
+  color: black;
+  font-size: 15px;
+  cursor: pointer;
+
+}
+#btn-modal1{
+  display: none;
+
+}
+.lbl-modal1{
+  
+  cursor: pointer;
+  transform: translate(0%,0%);
+  
+}
+.contenido1{
+  color:#fff;
+  margin:auto;
+  margin-left:10px;
+  margin-right: 10px;
+}
+
+.modal2{
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal2{
+  z-index: 51;
+  position: fixed;
+  top:0;
+  left: 0;
+  background: rgba(0,0,0,0.5);
+  transition: all 500ms ease;
+  opacity: 0;
+  visibility: hidden;
+}
+#btn-modal2:checked ~ .modal2{
+  opacity: 1;
+  visibility: visible;
+}
+.conteiner2{
+transform: translateY 110px;
+width: 500px;
+height: 200px;
+margin:auto;
+background:black;
+box-shadow: 1px 7px 25px rgba(0,0,0,0.6);
+transition: all 500ms ease;
+position: relative;
+transform: translateY(-30%);
+overflow: hidden;
+  overflow-y: scroll;
+}
+
+#btn-modal2:checked ~ .modal2 .conteiner2{
+ transform: translateY(0%);
+}
+
+.conteiner2 header{
+  padding: 10px;
+  background: #81ecec;
+  color: white;
+  text-align: center;
+  color:black;
+}
+.conteiner2 label{
+  position: absolute;
+  top:10px;
+  right: 10px;
+  color: black;
+  font-size: 15px;
+  cursor: pointer;
+
+}
+#btn-modal2{
+  display: none;
+
+}
+.lbl-modal2{
+  
+  cursor: pointer;
+  transform: translate(0%,0%);
+  
+}
+.contenido2{
+  color:#fff;
+  margin:auto;
+  margin-left:10px;
+  margin-right: 10px;
+}
+.roberto{
+  float: left;
+}
+body{
+	color:#999;
+	background-image:url(../images/roberto.jpg);
+	font-family: 'Roboto', sans-serif;
+	background-size: cover;
+}
+
+.form-control{
+	min-height: 41px;
+	box-shadow: none;
+	border-color: #e1e1e1;
+}
+.form-control:focus{
+	border-color: #00cb82;
+}
+.form-control, .btn{
+	border-radius: 3px;
+}
+.form-header{
+	margin: -30px -30px 20px;
+	padding: 30px 30px 10px;
+	text-align: center;
+	background: #00cb82;
+	border-bottom: 1px solid #eee;
+	color: #fff; 
+}
+.form-header h2{
+	font-size: 34px;
+	font-weight: bold;
+	margin: 0 0 10px;
+	font-family: 'Pacifico', sans-serif;
+}
+.form-header p{
+	margin: 20px 0 15px;
+	font-size: 17px;
+	line-height: normal;
+	font-family: 'Courgette', sans-serif;
+}
+.signup-form{
+	width: 390px;
+	margin: 0 auto;
+	padding: 30px 0;
+}
+.signup-form form{
+	color: #999;
+	border-radius: 3px;
+	margin-bottom: 15px;
+	background: #f0f0f0;
+	box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3);
+	padding: 30px;
+}
+.signup-form .form-group{
+	margin-bottom: 20px;
+}
+.signup-form label{
+	font-weight: normal;
+	font-size: 13px;
+}
+.signup-form .btn{
+	font-size: 16px;
+	font-weight: bold;
+	background: #00cb82;
+	border: none;
+	min-width: 200px;
+}
+.signup-form .btn:hover, .signup-form .btn:focus{
+	background: #00b073 !important;
+	outline: none;
+}
+.signup-form a{
+	color: #00cb82;
+}
+.signup-form a:hover{
+	text-decoration: underline;
+}
+.signup-form input[type="checkbox"]{
+	margin-top: 2px;
+}
