@@ -47,7 +47,7 @@
 				</select>
 			</div>
 			<div class="form-group">
-				<label>Gender</label>
+				<label>Genero</label>
 				<select class="form-control" name="user_gender" required>
 					<option disabled="">Selecciona tu genero</option>
 					<option>Mujer</option>
@@ -56,6 +56,10 @@
 				</select>
 			</div>
 
+			<div class="form-group">
+				<label>Mejor Amigo</label>
+				<input type="text" class="form-control" name="forgotten_answer" placeholder="elpepe" autocomplete="off" required>
+			</div>
 
 			<div class="form-group">
 				<div class="roberto">
