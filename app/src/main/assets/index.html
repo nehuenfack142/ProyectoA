@@ -1,0 +1,46 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>RT Contactos</title>
+<style>
+body{margin:0;background:#111418;color:#f3f5f7;font-family:Arial,sans-serif}.top{padding:14px;background:#0e1115;position:sticky;top:0}.brand{font-size:22px;font-weight:800}.sub{font-size:12px;color:#aeb6c2}.tabs{display:flex;gap:6px;margin-top:10px}.tab{flex:1;padding:10px;border:0;border-radius:9px;background:#252b34;color:#dfe4ea;font-weight:700}.tab.on{background:#356180}.page{display:none;padding:12px}.page.on{display:block}.card{background:#1b2027;border:1px solid #323a45;border-radius:13px;padding:12px;margin-bottom:10px}.title{font-size:17px;font-weight:800;margin-bottom:8px}.help,.meta{font-size:12px;color:#aeb6c2;line-height:1.4}textarea,input,select{width:100%;box-sizing:border-box;background:#252b34;color:#fff;border:1px solid #323a45;border-radius:9px;padding:10px;margin:5px 0}textarea{height:160px}.btn{border:0;border-radius:9px;padding:10px 12px;background:#356180;color:#fff;font-weight:800;margin:4px 2px}.green{background:#3aa675}.red{background:#d05c64}.contact{background:#1b2027;border:1px solid #323a45;border-radius:12px;padding:11px;margin-bottom:8px}.name{font-weight:800}.phone{color:#ff914d;margin-top:3px}.row{display:flex;gap:7px;flex-wrap:wrap}.row .btn{flex:1}.metric{display:inline-block;background:#252b34;border-radius:9px;padding:8px 10px;margin:3px}.current{background:#252b34;border-radius:10px;padding:10px;white-space:pre-wrap}.warn{color:#ffad66}
+</style></head><body>
+<div class="top"><div class="brand">RT Contactos</div><div class="sub">V2.1 · actualización de apertura de WhatsApp</div><div class="tabs"><button class="tab on" data-p="base">Base</button><button class="tab" data-p="send">Envíos</button><button class="tab" data-p="msgs">Mensajes</button></div></div>
+
+<section id="base" class="page on">
+<div class="card"><div class="title">Base de contactos</div><div class="help">Se conserva la misma base local de las versiones anteriores.</div><input id="search" placeholder="Buscar por nombre, CUIL o teléfono"><div id="stats"></div></div><div id="list"></div>
+</section>
+
+<section id="send" class="page">
+<div class="card"><div class="title">Cola de envíos</div><div id="sendStats"></div><div class="row"><button id="start" class="btn green">INICIAR</button><button id="stop" class="btn red">DETENER</button></div></div>
+<div class="card"><div class="title">Contacto actual</div><div id="empty" class="help">No hay un contacto seleccionado.</div><div id="cur" style="display:none"><div class="current"><div id="cname" class="name"></div><div id="cphone" class="phone"></div><div id="cmsg" style="margin-top:8px"></div></div><div class="row"><button id="open" class="btn">ABRIR WHATSAPP</button><button id="sent" class="btn green">Enviado y siguiente</button><button id="skip" class="btn">Omitir y siguiente</button></div></div></div>
+</section>
+
+<section id="msgs" class="page"><div class="card"><div class="title">Mensajes</div><div class="help">Variables: {nombre}, {nombre_completo}, {telefono}, {localidad}</div><textarea id="m1"></textarea><textarea id="m2"></textarea><textarea id="m3"></textarea><textarea id="m4"></textarea><button id="saveMsgs" class="btn">Guardar mensajes</button></div></section>
+
+<script>
+const DB='rt_contactos_v1.json',SET='rt_settings_v1.json';let db=[],currentId=null,rot=0;
+const $=x=>document.getElementById(x);
+function read(p){try{if(Android&&Android.readFile){let s=Android.readFile(p);if(s&&!s.startsWith('ERROR:'))return s}}catch(e){}return localStorage.getItem(p)||''}
+function write(p,s){try{if(Android&&Android.writeFile&&Android.writeFile(p,s))return}catch(e){}localStorage.setItem(p,s)}
+function toast(s){try{Android.toast(s)}catch(e){}}
+function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function load(){try{db=JSON.parse(read(DB)||'[]')}catch(e){db=[]}for(const r of db){if(!r.sendStatus)r.sendStatus='pending'}save(false);render()}
+function save(renderNow=true){write(DB,JSON.stringify(db));if(renderNow)render()}
+function render(){let q=($('search').value||'').toLowerCase();let arr=db.filter(r=>!q||[r.name,r.cuil,r.phoneOriginal,r.phoneNormalized].some(v=>String(v||'').toLowerCase().includes(q)));$('stats').innerHTML='<span class="metric">'+db.length+' guardados</span><span class="metric">'+db.filter(r=>r.sendStatus==='sent').length+' enviados</span>';$('list').innerHTML=arr.map(r=>'<div class="contact"><div class="name">'+esc(r.name||'Sin nombre')+'</div><div class="phone">'+esc(r.phoneOriginal||'')+(r.phoneNormalized?' → +'+esc(r.phoneNormalized):'')+'</div><div class="meta">'+esc(r.locality||'')+(r.diagnosis?'<br>'+esc(r.diagnosis):'')+'</div></div>').join('')||'<div class="help">Sin contactos.</div>';sendStats();renderCurrent()}
+function msgs(){let d=["Hola {nombre}, ¿cómo estás? Te escribo de Estudio Jurídico RT por la consulta relacionada con tu accidente. Cuando puedas, respondeme por este medio.","Hola {nombre}. Te escribo de Estudio Jurídico RT por tu consulta. Si querés, respondeme por acá.","Buenas {nombre}, ¿todo bien? Te escribo desde Estudio Jurídico RT. Cuando tengas un momento, contestame por este medio.","Hola {nombre}, te escribo de Estudio Jurídico RT. Si te sirve, respondeme por este medio y vemos cómo orientarte."];try{let x=JSON.parse(read(SET)||'{}');return x.templates?.length?x.templates:d}catch(e){return d}}
+function first(n){return String(n||'').trim().split(/\s+/)[0]||''}
+function renderMsg(t,r){return t.replaceAll('{nombre}',first(r.name)).replaceAll('{nombre_completo}',r.name||'').replaceAll('{telefono}',r.phoneOriginal||'').replaceAll('{localidad}',r.locality||'')}
+function current(){return db.find(r=>r.id===currentId)}
+function next(){let r=db.find(r=>!r.needsReview&&r.phoneNormalized&&r.sendStatus==='pending');currentId=r?r.id:null;if(r&&!r._preparedMessage){r._preparedMessage=renderMsg(msgs()[rot%4],r);rot++}renderCurrent();return r}
+function renderCurrent(){let r=current();$('empty').style.display=r?'none':'block';$('cur').style.display=r?'block':'none';if(!r)return;$('cname').textContent=r.name||'';$('cphone').textContent='+'+(r.phoneNormalized||'');$('cmsg').textContent=r._preparedMessage||''}
+function sendStats(){$('sendStats').innerHTML='<span class="metric">'+db.filter(r=>r.sendStatus==='pending'&&!r.needsReview).length+' pendientes</span><span class="metric">'+db.filter(r=>r.sendStatus==='sent').length+' enviados</span>'}
+function openWa(r){if(!r)return;let msg=r._preparedMessage||renderMsg(msgs()[0],r);r._preparedMessage=msg;try{if(Android&&Android.openWhatsApp&&Android.openWhatsApp(String(r.phoneNormalized),String(msg)))return}catch(e){}location.href='https://wa.me/'+encodeURIComponent(r.phoneNormalized)+'?text='+encodeURIComponent(msg)}
+document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));b.classList.add('on');$(b.dataset.p).classList.add('on');render()});
+$('search').oninput=render;
+$('start').onclick=()=>{let r=current();if(!r||r.sendStatus!=='pending')r=next();if(r)openWa(r);else toast('No hay pendientes')};
+$('open').onclick=()=>openWa(current());
+$('stop').onclick=()=>{currentId=null;renderCurrent()};
+$('sent').onclick=()=>{let r=current();if(!r)return;r.sendStatus='sent';r.sentAt=new Date().toISOString();save(false);let n=next();render();if(n)openWa(n)};
+$('skip').onclick=()=>{let r=current();if(!r)return;r.sendStatus='skipped';save(false);let n=next();render();if(n)openWa(n)};
+function loadMsgs(){let a=msgs();for(let i=1;i<=4;i++)$('m'+i).value=a[i-1]||''}
+$('saveMsgs').onclick=()=>{write(SET,JSON.stringify({templates:[1,2,3,4].map(i=>$('m'+i).value.trim())}));toast('Mensajes guardados')};
+load();loadMsgs();
+</script></body></html>
