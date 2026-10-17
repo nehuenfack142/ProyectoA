@@ -1,6 +1,6 @@
 package com.duolinco.de;
 
-import android.app.Activity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.net.Uri;
 import android.webkit.WebSettings;
@@ -14,7 +14,7 @@ import android.content.ActivityNotFoundException;
 import android.widget.Toast;
 import java.io.*;
 
-public class MainActivity extends Activity {
+public class MainActivity extends AppCompatActivity {
     private WebView webView;
 
     @Override
