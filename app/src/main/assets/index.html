@@ -2,9 +2,18 @@
 <style>
 body{margin:0;background:#111418;color:#f3f5f7;font-family:Arial,sans-serif}.top{padding:14px;background:#0e1115;position:sticky;top:0}.brand{font-size:22px;font-weight:800}.sub{font-size:12px;color:#aeb6c2}.tabs{display:flex;gap:6px;margin-top:10px}.tab{flex:1;padding:10px;border:0;border-radius:9px;background:#252b34;color:#dfe4ea;font-weight:700}.tab.on{background:#356180}.page{display:none;padding:12px}.page.on{display:block}.card{background:#1b2027;border:1px solid #323a45;border-radius:13px;padding:12px;margin-bottom:10px}.title{font-size:17px;font-weight:800;margin-bottom:8px}.help,.meta{font-size:12px;color:#aeb6c2;line-height:1.4}textarea,input,select{width:100%;box-sizing:border-box;background:#252b34;color:#fff;border:1px solid #323a45;border-radius:9px;padding:10px;margin:5px 0}textarea{height:160px}.btn{border:0;border-radius:9px;padding:10px 12px;background:#356180;color:#fff;font-weight:800;margin:4px 2px}.green{background:#3aa675}.red{background:#d05c64}.contact{background:#1b2027;border:1px solid #323a45;border-radius:12px;padding:11px;margin-bottom:8px}.name{font-weight:800}.phone{color:#ff914d;margin-top:3px}.row{display:flex;gap:7px;flex-wrap:wrap}.row .btn{flex:1}.metric{display:inline-block;background:#252b34;border-radius:9px;padding:8px 10px;margin:3px}.current{background:#252b34;border-radius:10px;padding:10px;white-space:pre-wrap}.warn{color:#ffad66}
 </style></head><body>
-<div class="top"><div class="brand">RT Contactos</div><div class="sub">V2.1 · actualización de apertura de WhatsApp</div><div class="tabs"><button class="tab on" data-p="base">Base</button><button class="tab" data-p="send">Envíos</button><button class="tab" data-p="msgs">Mensajes</button></div></div>
+<div class="top"><div class="brand">RT Contactos</div><div class="sub">V2.1.3 · Importar, Base, Envíos y Mensajes</div><div class="tabs"><button class="tab on" data-p="import">Importar</button><button class="tab" data-p="base">Base</button><button class="tab" data-p="send">Envíos</button><button class="tab" data-p="msgs">Mensajes</button></div></div>
 
-<section id="base" class="page on">
+<section id="import" class="page on">
+<div class="card"><div class="title">Pegar listado</div><div class="help">Pegá acá el mensaje grande que recibís por WhatsApp. La app detecta cada persona, separa los datos y después los guarda en la base.</div>
+<textarea id="src" placeholder="Pegá el listado acá..."></textarea>
+<div class="row"><button id="parse" class="btn">PROCESAR TEXTO</button><button id="clearImport" class="btn red">LIMPIAR</button></div></div>
+<div id="previewWrap" style="display:none">
+<div class="card"><div class="title">Resultado</div><div id="previewStats"></div><button id="saveImport" class="btn green">GUARDAR EN BASE</button></div>
+<div id="previewList"></div></div>
+</section>
+
+<section id="base" class="page">
 <div class="card"><div class="title">Base de contactos</div><div class="help">Se conserva la misma base local de las versiones anteriores.</div><input id="search" placeholder="Buscar por nombre, CUIL o teléfono"><div id="stats"></div></div><div id="list"></div>
 </section>
 
@@ -16,12 +25,20 @@ body{margin:0;background:#111418;color:#f3f5f7;font-family:Arial,sans-serif}.top
 <section id="msgs" class="page"><div class="card"><div class="title">Mensajes</div><div class="help">Variables: {nombre}, {nombre_completo}, {telefono}, {localidad}</div><textarea id="m1"></textarea><textarea id="m2"></textarea><textarea id="m3"></textarea><textarea id="m4"></textarea><button id="saveMsgs" class="btn">Guardar mensajes</button></div></section>
 
 <script>
-const DB='rt_contactos_v1.json',SET='rt_settings_v1.json';let db=[],currentId=null,rot=0;
+const DB='rt_contactos_v1.json',SET='rt_settings_v1.json';let db=[],currentId=null,rot=0,preview=[];
 const $=x=>document.getElementById(x);
 function read(p){try{if(Android&&Android.readFile){let s=Android.readFile(p);if(s&&!s.startsWith('ERROR:'))return s}}catch(e){}return localStorage.getItem(p)||''}
 function write(p,s){try{if(Android&&Android.writeFile&&Android.writeFile(p,s))return}catch(e){}localStorage.setItem(p,s)}
 function toast(s){try{Android.toast(s)}catch(e){}}
 function esc(s){return String(s??'').replace(/[&<>"']/g,m=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#039;'}[m]))}
+function digits(s){return String(s||'').replace(/\D/g,'')}
+function normPhone(raw){let d=digits(raw);if(d.startsWith('00'))d=d.slice(2);if(d.startsWith('549')&&d.length===13)return d;if(d.startsWith('54')&&d.length===12)return '549'+d.slice(2);if(d.startsWith('01115')&&d.length===13)return '54911'+d.slice(5);if(d.startsWith('011')&&d.length===11)return '549'+d.slice(1);if(d.startsWith('15')&&d.length===10)return '54911'+d.slice(2);if(d.startsWith('11')&&d.length===10)return '549'+d;if(d.length===10)return '549'+d;return ''}
+function uid(){return Date.now().toString(36)+Math.random().toString(36).slice(2,8)}
+function splitRecords(t){t=String(t||'').replace(/\r/g,'\n').trim();if(!t)return[];let lines=t.split(/\n+/).map(x=>x.trim()).filter(Boolean),out=[],cur='';for(const line of lines){let newRec=/\b\d{11}\b/.test(line)&&/[A-Za-zÁÉÍÓÚÑáéíóúñ]/.test(line.slice(0,60));if(newRec&&cur){out.push(cur);cur=''}cur+=(cur?'\n':'')+line}if(cur)out.push(cur);return out}
+function smartParts(raw){let p=raw.split(/\t+/).map(x=>x.trim()).filter(Boolean);if(p.length>=5)return p;p=raw.replace(/\n/g,'  ').split(/\s{2,}/).map(x=>x.trim()).filter(Boolean);if(p.length>=5)return p;return [raw]}
+function parseRecord(raw){let p=smartParts(raw),ci=p.findIndex(x=>digits(x).length===11),pi=-1;for(let i=p.length-1;i>=0;i--){let d=digits(p[i]);if(d.length>=10&&d.length<=13){pi=i;break}}let name=ci>0?p.slice(0,ci).join(' ').replace(/\n/g,' ').trim():(p[0]||'').trim();let cuil=ci>=0?digits(p[ci]):'',phone=pi>=0?p[pi]:'',middle=p.filter((_,i)=>i!==ci&&i!==pi&&!(ci>0&&i<ci));let r={id:uid(),name,cuil,diagnosis:middle[0]||'',accidentPlace:middle[1]||'',description:middle[2]||'',locality:(middle[3]||'').replace(/^\(|\)$/g,'').trim(),phoneOriginal:phone,phoneNormalized:normPhone(phone),sendStatus:'pending',raw};r.needsReview=!r.name||r.cuil.length!==11||!r.phoneNormalized;return r}
+function previewCard(r){return '<div class="contact"><div class="name">'+esc(r.name||'Nombre a revisar')+'</div><div class="phone">'+esc(r.phoneOriginal||'Sin teléfono')+(r.phoneNormalized?' → +'+esc(r.phoneNormalized):'')+'</div><div class="meta">'+(r.cuil?'<b>CUIL:</b> '+esc(r.cuil)+'<br>':'')+(r.diagnosis?'<b>Diagnóstico:</b> '+esc(r.diagnosis)+'<br>':'')+(r.accidentPlace?'<b>Ámbito:</b> '+esc(r.accidentPlace)+'<br>':'')+(r.description?'<b>Descripción:</b> '+esc(r.description)+'<br>':'')+(r.locality?'<b>Localidad:</b> '+esc(r.locality):'')+(r.needsReview?'<br><span class="warn">REVISAR DATOS</span>':'')+'</div></div>'}
+function renderPreview(){let valid=preview.filter(x=>!x.needsReview).length;$('previewWrap').style.display=preview.length?'block':'none';$('previewStats').innerHTML='<span class="metric">'+preview.length+' detectados</span><span class="metric">'+valid+' válidos</span><span class="metric">'+(preview.length-valid)+' revisar</span>';$('previewList').innerHTML=preview.map(previewCard).join('')}
 function load(){try{db=JSON.parse(read(DB)||'[]')}catch(e){db=[]}for(const r of db){if(!r.sendStatus)r.sendStatus='pending'}save(false);render()}
 function save(renderNow=true){write(DB,JSON.stringify(db));if(renderNow)render()}
 function render(){let q=($('search').value||'').toLowerCase();let arr=db.filter(r=>!q||[r.name,r.cuil,r.phoneOriginal,r.phoneNormalized].some(v=>String(v||'').toLowerCase().includes(q)));$('stats').innerHTML='<span class="metric">'+db.length+' guardados</span><span class="metric">'+db.filter(r=>r.sendStatus==='sent').length+' enviados</span>';$('list').innerHTML=arr.map(r=>'<div class="contact"><div class="name">'+esc(r.name||'Sin nombre')+'</div><div class="phone">'+esc(r.phoneOriginal||'')+(r.phoneNormalized?' → +'+esc(r.phoneNormalized):'')+'</div><div class="meta">'+esc(r.locality||'')+(r.diagnosis?'<br>'+esc(r.diagnosis):'')+'</div></div>').join('')||'<div class="help">Sin contactos.</div>';sendStats();renderCurrent()}
@@ -34,6 +51,9 @@ function renderCurrent(){let r=current();$('empty').style.display=r?'none':'bloc
 function sendStats(){$('sendStats').innerHTML='<span class="metric">'+db.filter(r=>r.sendStatus==='pending'&&!r.needsReview).length+' pendientes</span><span class="metric">'+db.filter(r=>r.sendStatus==='sent').length+' enviados</span>'}
 function openWa(r){if(!r)return;let msg=r._preparedMessage||renderMsg(msgs()[0],r);r._preparedMessage=msg;try{if(Android&&Android.openWhatsApp&&Android.openWhatsApp(String(r.phoneNormalized),String(msg)))return}catch(e){}location.href='https://wa.me/'+encodeURIComponent(r.phoneNormalized)+'?text='+encodeURIComponent(msg)}
 document.querySelectorAll('.tab').forEach(b=>b.onclick=()=>{document.querySelectorAll('.tab').forEach(x=>x.classList.remove('on'));document.querySelectorAll('.page').forEach(x=>x.classList.remove('on'));b.classList.add('on');$(b.dataset.p).classList.add('on');render()});
+$('parse').onclick=()=>{preview=splitRecords($('src').value).map(parseRecord);renderPreview()};
+$('clearImport').onclick=()=>{$('src').value='';preview=[];renderPreview()};
+$('saveImport').onclick=()=>{let added=0,dupes=0;for(const r of preview){let dup=db.some(x=>(r.cuil&&x.cuil===r.cuil)||(r.phoneNormalized&&x.phoneNormalized===r.phoneNormalized));if(dup){dupes++;continue}db.push(r);added++}save();toast(added+' guardados'+(dupes?' · '+dupes+' duplicados':''));preview=[];$('src').value='';renderPreview();document.querySelector('[data-p="base"]').click()};
 $('search').oninput=render;
 $('start').onclick=()=>{let r=current();if(!r||r.sendStatus!=='pending')r=next();if(r)openWa(r);else toast('No hay pendientes')};
 $('open').onclick=()=>openWa(current());
